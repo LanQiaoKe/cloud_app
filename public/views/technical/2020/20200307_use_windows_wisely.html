@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>在centos7中搭建自己的apache服务器 | 学习分享</title>
+    <meta name="generator" content="VuePress 1.5.2">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="description" content="兰桥科的云应用学习分享">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <link rel="preload" href="/assets/css/0.styles.0c5a9259.css" as="style"><link rel="preload" href="/assets/js/app.436b8789.js" as="script"><link rel="preload" href="/assets/js/3.26240bff.js" as="script"><link rel="preload" href="/assets/js/1.4d580cd6.js" as="script"><link rel="preload" href="/assets/js/12.9001da7f.js" as="script"><link rel="prefetch" href="/assets/js/10.66af7a37.js"><link rel="prefetch" href="/assets/js/11.8e0e332c.js"><link rel="prefetch" href="/assets/js/4.3aa1f0c1.js"><link rel="prefetch" href="/assets/js/5.6cfce982.js"><link rel="prefetch" href="/assets/js/6.aa65b477.js"><link rel="prefetch" href="/assets/js/7.b536c2bf.js"><link rel="prefetch" href="/assets/js/8.f4f1d219.js"><link rel="prefetch" href="/assets/js/9.c7d0ee3f.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0c5a9259.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div><div class="theme-container" data-v-4698c43e><div data-v-4698c43e><div id="loader-wrapper" class="loading-wrapper" data-v-4b73742e data-v-4698c43e data-v-4698c43e><div class="loader-main" data-v-4b73742e><div data-v-4b73742e></div><div data-v-4b73742e></div><div data-v-4b73742e></div><div data-v-4b73742e></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-6cbeab0a data-v-4698c43e data-v-4698c43e><h3 class="title" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a>学习分享</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a><input type="password" value="" data-v-6cbeab0a> <span data-v-6cbeab0a>Konck! Knock!</span> <button data-v-6cbeab0a>OK</button></label> <div class="footer" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a><span data-v-6cbeab0a><i class="iconfont reco-theme" data-v-6cbeab0a></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-6cbeab0a>vuePress-theme-reco</a></span> <span data-v-6cbeab0a><i class="iconfont reco-copyright" data-v-6cbeab0a></i> <a data-v-6cbeab0a><span data-v-6cbeab0a>QiaoKe Lan</span>
+            
+          <span data-v-6cbeab0a>2020 - </span>
+          2020
+        </a></span></div></div> <div class="hide" data-v-4698c43e><header class="navbar" data-v-4698c43e><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo_trans.png" alt="学习分享" class="logo"> <span class="site-name">学习分享</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/technical/" class="nav-link"><i class="iconfont undefined"></i>
+  technical
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://gitlab.com/bobyuan/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-gitlab"></i>
+  GitLab
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-4698c43e></div> <aside class="sidebar" data-v-4698c43e><div class="personal-info-wrapper" data-v-6c8ffc9c><img src="/avatar.png" alt="author-avatar" class="personal-img" data-v-6c8ffc9c> <h3 class="name" data-v-6c8ffc9c>
+    QiaoKe Lan
+  </h3> <div class="num" data-v-6c8ffc9c><div data-v-6c8ffc9c><h3 data-v-6c8ffc9c>2</h3> <h6 data-v-6c8ffc9c>文章</h6></div> <div data-v-6c8ffc9c><h3 data-v-6c8ffc9c>3</h3> <h6 data-v-6c8ffc9c>标签</h6></div></div> <hr data-v-6c8ffc9c></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/other/" class="nav-link"><i class="iconfont undefined"></i>
+  other
+</a></li><li class="dropdown-item"><!----> <a href="/categories/technical/" class="nav-link"><i class="iconfont undefined"></i>
+  technical
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://gitlab.com/bobyuan/" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-gitlab"></i>
+  GitLab
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>在centos7中搭建自己的apache服务器</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/views/technical/2020/20200307_use_windows_wisely.html#apache-服务" class="sidebar-link">Apache 服务</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/technical/2020/20200307_use_windows_wisely.html#部署web服务设计" class="sidebar-link">部署web服务设计</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/technical/2020/20200307_use_windows_wisely.html#安装服务及对其进行相应的配置" class="sidebar-link">安装服务及对其进行相应的配置</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/technical/2020/20200307_use_windows_wisely.html#小结" class="sidebar-link">小结</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-6cbeab0a data-v-4698c43e><h3 class="title" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a>在centos7中搭建自己的apache服务器</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a><input type="password" value="" data-v-6cbeab0a> <span data-v-6cbeab0a>Konck! Knock!</span> <button data-v-6cbeab0a>OK</button></label> <div class="footer" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a><span data-v-6cbeab0a><i class="iconfont reco-theme" data-v-6cbeab0a></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-6cbeab0a>vuePress-theme-reco</a></span> <span data-v-6cbeab0a><i class="iconfont reco-copyright" data-v-6cbeab0a></i> <a data-v-6cbeab0a><span data-v-6cbeab0a>QiaoKe Lan</span>
+            
+          <span data-v-6cbeab0a>2020 - </span>
+          2020
+        </a></span></div></div> <div data-v-4698c43e><main class="page"><!----> <div class="page-title" style="display:none;"><h1>在centos7中搭建自己的apache服务器</h1> <hr> <div data-v-484a899e><i class="iconfont reco-account" data-v-484a899e><span data-v-484a899e>QiaoKe Lan</span></i> <i class="iconfont reco-date" data-v-484a899e><span data-v-484a899e>2020-06-16</span></i> <!----> <i class="iconfont reco-tag tags" data-v-484a899e><span class="tag-item" data-v-484a899e>
+      Apache Web Service
+    </span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><h2 id="apache-服务"><a href="#apache-服务" class="header-anchor">#</a> Apache 服务</h2> <p>Apache HTTP Server（简称Apache）是<a href="https://baike.baidu.com/item/Apache%E8%BD%AF%E4%BB%B6%E5%9F%BA%E9%87%91%E4%BC%9A" target="_blank" rel="noopener noreferrer">Apache软件基金会<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>的一个开放源码的网页服务器，可以在大多数计算机操作系统中运行，由于其多平台和安全性被广泛使用，是最流行的Web服务器端软件之一。它快速、可靠并且可通过简单的API扩展，将Perl/Python等解释器编译到服务器中。</p> <p><img src="asset/20200307/apache.jpg" alt=""></p> <p>Apache HTTP服务器是一个模块化的服务器，源于NCSAhttpd服务器，经过多次修改，成为世界使用排名第一的Web服务器软件。
+它可以运行在几乎所有广泛使用的计算机平台上。
+Apache源于NCSAhttpd服务器，经过多次修改，成为世界上最流行的Web服务器软件之一。Apache取自“a patchy server”的读音，意思是充满补丁的服务器，因为它是自由软件，所以不断有人来为它开发新的功能、新的特性、修改原来的缺陷。Apache的特点是简单、速度快、性能稳定，并可做代理服务器来使用。
+本来它只用于小型或试验Internet网络，后来逐步扩充到各种Unix系统中，尤其对Linux的支持相当完美。Apache有多种产品，可以支持SSL技术，支持多个虚拟主机。Apache是以进程为基础的结构，进程要比线程消耗更多的系统开支，不太适合于多处理器环境，因此，在一个Apache Web站点扩容时，通常是增加服务器或扩充群集节点而不是增加处理器。到目前为止Apache仍然是世界上用的最多的Web服务器，市场占有率达60%左右。世界上很多著名的网站如<a href="https://www.amazon.cn/" target="_blank" rel="noopener noreferrer">Amazon<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>、Yahoo!、W3 Consortium、Financial Times等都是Apache的产物，它的成功之处主要在于它的源代码开放、有一支开放的开发队伍、支持跨平台的应用（可以运行在几乎所有的Unix、Windows、Linux系统平台上）以及它的可移植性等方面。
+Apache的诞生极富有戏剧性。当NCSAWWW服务器项目停顿后，那些使用NCSAWWW服务器的人们开始交换他们用于该服务器的补丁程序，他们也很快认识到成立管理这些补丁程序的论坛是必要的。就这样，诞生了Apache Group，后来这个团体在NCSA的基础上创建了Apache。
+Apacheweb服务器软件拥有以下特性：
+1.支持最新的HTTP/1.1通信协议
+2.拥有简单而强有力的基于文件的配置过程
+3.支持通用网关接口
+4.支持基于IP和基于域名的虚拟主机
+5.支持多种方式的HTTP认证
+6.集成Perl处理模块
+7.集成代理服务器模块
+8.支持实时监视服务器状态和定制服务器日志
+9.支持服务器端包含指令(SSI)
+10.支持安全Socket层(SSL)
+11.提供用户会话过程的跟踪
+12.支持FastCGI
+13.通过第三方模块可以支持JavaServlets
+如果你准备选择Web服务器，毫无疑问Apache是你的最佳选择。</p> <h2 id="部署web服务设计"><a href="#部署web服务设计" class="header-anchor">#</a> 部署web服务设计</h2> <p>本次测试目标为在Vmware平台搭建自己的apache web网站，并通过<a href="https://baike.baidu.com/item/awstats" target="_blank" rel="noopener noreferrer">awstats<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>来对网站进行访问分析，搭建好网站后可通过对apache的配置文件进行修改来实现对httpd服务的访问控制、客户机的地址限制、用户授权限制，构建虚拟WEB主机、基于域名的虚拟主机、基于IP地址、端口的虚拟主机。最后利用宿主机的网页浏览器能够进行访问和验证搭建好的网页。
+宿主机安装好Vmware控制台，准备好用于服务器搭建的Linux系统CentOS7，再准备好httpd及其tools工具包的下载链接，之后在服务器上安装服务器后下载awstats及其依赖包，完成各项配置即可。</p> <h2 id="安装服务及对其进行相应的配置"><a href="#安装服务及对其进行相应的配置" class="header-anchor">#</a> 安装服务及对其进行相应的配置</h2> <p>1部署准备</p> <p>本次部署项目准备通过wget命令来安装httpd及其tools工具包，这样就准备好了web部署所需的软件包，之后再同样通过wget来安装好AWStats及其依赖包，完成对日志分析的准备，通过配置apach来部署好web网页后再在httpd的配置文件中对配置信息进行修改来实现三种不同的访问控制，包括访问控制，客户机的地址限制，用户授权限制。同样的，修改CentOS等的配置信息来实现构建虚拟WEB主机，基于域名的虚拟主机，基于IP地址、端口的虚拟主机。
+关于服务器的部署因为这次只是我自己的一个尝试，所以我没有去云服务平台购买云服务器，而是选择了Vmware Workstation平台的CentOS7虚拟机来替代，进行web的部署。</p> <p>本书所使用的软件包及其版本(可使用其他更新版本的软件）：</p> <p>注意：最好去官方网站找到下载包链接，避免使用百度到的包，以免下载到虚拟机后出现不可解决的问题。</p> <p><a href="https://downloads.apache.org/httpd/" target="_blank" rel="noopener noreferrer">httpd-2.2.27.tar.gz<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> <a href="http://www.awstats.org/" target="_blank" rel="noopener noreferrer">awstats-7.0.tar.gz<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> <a href="https://www.cpan.org/src/README.html" target="_blank" rel="noopener noreferrer">perl-5.16.1.tar.gz<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>本书搭建服务器的环境
+CentOS7.0版本
+IP地址：221.221.221.37 255.255.255.0</p> <p>配置好yum仓库</p> <p>2搭建服务</p> <p>第1步：卸载httpd软件及相关软件包</p> <div class="language- extra-class"><pre class="language-text"><code># rpm -e httpd httpd-manual webalizer subversion mod_python mod_ssl mod_perl system-config-httpd php php-cli php-ldap php-common mysql dovecot --nodeps
+
+
+注释：--nodeps是强制接触依赖关系 
+</code></pre></div><p>第2步：检查手工编译需要的4中软件包是否安装</p> <div class="language- extra-class"><pre class="language-text"><code># rpm -q gcc
+# rpm -q gcc-c++
+# rpm -q make
+# yum install pcre-devel -y
+</code></pre></div><p>第3步：解压软件包及源码编译安装Apache并进行配置</p> <div class="language- extra-class"><pre class="language-text"><code># tar zxvf httpd-2.2.27.tar.gz 
+# make #编译，将编译程序变为可执行程序
+# make test
+# make install #安装
+# Vi http.conf #进行基础文档配置
+# service httpd start #启动服务没有效果
+# netstat -anutp | grep http #监听http服务
+</code></pre></div><p>至此，基础的部署已经完成，在主机上正常情况下应该可以通过在浏览器输入服务器的IP地址来看到apache web服务的欢迎画面。</p> <p><img src="asset/20200307/1.png" alt=""></p> <blockquote><p><strong>注意：</strong> 要保证两台设备能够正常进行连接，可使用ping指令来确认连接无误，若初次尝试ping未能连通很可能是因为防火墙，可关闭设备的防火墙。此操作有风险，请谨慎操作！</p></blockquote> <p>3构建虚拟WEB主机
+虚拟Web主机在同一台服务器中运行多个Web站点，其中每一个站点并不独立占用一
+台真正的计算机
+httpd支持的虚拟主机类型
+1、基于域名的虚拟主机
+2、基于IP地址的虚拟主机
+3、基于端口的虚拟主机</p> <p>第1步：基于域名的虚拟主机
+需求：
+1：本次将构建2个虚拟Web站点：
+Test1.lanqiaoke.top，IP地址为 221.221.221.37
+Test.lanqiaoke.top，IP地址为 221.221.221.37</p> <p>2：通过添加如下图中的配置信息到http服务的配置文档中实现</p> <p><img src="asset/20200307/2.png" alt=""></p> <p>3：物理主机ping域名测试</p> <p>CMD：C:\Users\93213&gt;Ping Test1.lanqiaoke.top
+C:\Users\93213&gt;Ping Test2.lanqiaoke.top
+4：重启httpd服务
+[root@]# systemctl restart httpd</p> <p>操作完成后，您将可通过使用虚拟站点来访问您的Web页面，在此之前记得完成第四步重启httpd服务来使您的最新配置文件生效。</p> <p><img src="asset/20200307/9.png" alt=""></p> <p>第2步：配置基于IP+端口的虚拟主机
+1:创建配置文件
+[root@localhost ~]# cd /etc/httpd/conf.d/
+[root@localhost conf.d]# vim virtual.conf</p> <div class="language- extra-class"><pre class="language-text"><code>&lt;VirtualHost 221.221.221.37:80&gt;
+        ServerName test2
+        DocumentRoot &quot;/var/www/html &quot;
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost 221.221.221.37:8080&gt;
+        ServerName test3
+        DocumentRoot &quot;/var/www/html&quot;
+&lt;/VirtualHost&gt;
+</code></pre></div><p>2:修改httpd主配置文件，在Listen 80下面添加一行监控8080端口
+[root@localhost conf.d]# vim /etc/httpd/conf/httpd.conf
+Listen 8080</p> <p>3：重启httpd服务
+[root@]# systemctl restart httpd
+4：打开浏览器，查看结果</p> <p><img src="asset/20200307/3.png" alt=""></p> <p>第3步：添加基于多个IP的虚拟主机
+1:创建配置文件</p> <div class="language- extra-class"><pre class="language-text"><code>[root@localhost ~]# cd /etc/httpd/conf.d/
+[root@localhost conf.d]# vim virtual.conf
+&lt;VirtualHost 221.221.221.37:80&gt;
+        ServerName a.com
+        DocumentRoot &quot;/var/www/html&quot;    #网页路径
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost 221.221.221.38:80&gt;
+        ServerName b.com
+        DocumentRoot &quot;/var/www/html &quot;    #网页路径
+&lt;/VirtualHost&gt;
+</code></pre></div><p>2:网卡绑定多个IP（我的网卡名是ens33，不是eth0）</p> <div class="language- extra-class"><pre class="language-text"><code>[root@localhost conf.d]# ip addr add 221.221.221.38 dev ens33
+[root@localhost conf.d]# ip addr#查看IP配置是否正确生效
+</code></pre></div><p>3:检查配置文件是否正常</p> <div class="language- extra-class"><pre class="language-text"><code>[root@localhost conf.d]# httpd -t
+</code></pre></div><p>4：重启httpd服务</p> <div class="language- extra-class"><pre class="language-text"><code>[root@]# systemctl restart httpd
+</code></pre></div><p>5：打开浏览器，查看结果</p> <p><img src="asset/20200307/4.png" alt=""></p> <p>4 Httpd服务访问控制
+作用：
+1控制对网站资源的访问
+2为特定的网站目录添加访问授权</p> <p>常用访问控制方式：
+1客户机地址限制
+2用户授权限制</p> <p>1客户机地址限制
+通过配置Order、Deny from、Allow from 来限制客户机
+allow、deny ：先&quot;允许&quot;后&quot;拒绝&quot; ，默认拒绝所有为明确的客户机地址。
+deny、allow：先&quot;拒绝&quot;后&quot;允许&quot;，默认允许所有为明确的客户机地址</p> <div class="language- extra-class"><pre class="language-text"><code> [root@www tools]# vim /usr/local/httpd/conf/httpd.conf
+&lt;Directory /&gt;
+    Options FollowSymLinks
+    AllowOverride None
+    Order deny,allow
+    Deny from all
+&lt;/Directory&gt;
+</code></pre></div><p>2用户授权限制
+第1步：httpd服务器支持使用摘要认证（Digest）和基本认证（Basic）两种方式。使用摘要认证需要在编译httpd之前添加&quot;--enable-auth-digest&quot;选项、但并不是所有的浏览器都支持摘要认证、基本认证不需要预先配置。</p> <div class="language- extra-class"><pre class="language-text"><code>[root@www tools]# cd /usr/local/httpd/
+[root@www httpd]# bin/htpasswd -c /usr/local/httpd/conf/.awspwd webadmin
+New password: 
+Re-type new password: 
+Adding password for user webadmin
+[root@www httpd]# cat /usr/local/httpd/conf/.awspwd  #确认用户数据文件
+lanqiaoke:$apr1$ICdyiYAY$VVDvzApAlvqyJ/5w3f7251
+省略-c选择、表示用户数据文件已经存在、添加新用户或修改现有用户的密码、测不需要指定-c选项
+</code></pre></div><p>第2步：添加用户授权配置</p> <div class="language- extra-class"><pre class="language-text"><code>[root@www httpd]# vim /usr/local/httpd/conf/httpd.conf   #追加如下内容
+&lt;Directory &quot;/usr/local/awstats/wwwroot&quot;&gt;
+   AuthName &quot;AWStats Directory&quot;
+   AuthType Basic
+   AuthUserFile /usr/lcoal/httpd/conf/.awspwd
+   require valid-user
+&lt;/Directory&gt;
+[root@www httpd]# /usr/local/httpd/bin/apachectl restart  #重启服务使配置生效
+AuthName ：定义受保护领域的名称
+AuthType: 设置认证的类型、Basic表示基本认证
+AuthUserFile :设置用于保存用户账号、密码的认证文件路径
+require valid-user：要求认证文件存在的用户才能访问
+</code></pre></div><p>第3步：重启服务并验证配置是否生效</p> <div class="language- extra-class"><pre class="language-text"><code>[root@]# systemctl restart httpd
+</code></pre></div><p><img src="asset/20200307/5.png" alt=""></p> <p>5 AWStats业务数据分析工具安装及配置
+Awstats是一个非常简洁而且强大的统计工具。它可以统计您站点的如下信息：
+一：访问量，访问次数，页面浏览量，点击数，数据流量等精确到每月、每日、每小时的数据
+二：访问者国家、访问者IP、操作系统、浏览器等
+三：Robots/Spiders的统计
+四：纺客持续时间
+五：对不同Files type 的统计信息
+六：Pages-URL的统计
+七：其它信息（搜索关键字等等）
+http://awstats.sourceforge.net/   awstats官方网站
+http://www.perl.com/    perl官方网站
+第1步:安装perl<br>
+　　Awstats基于Perl的WEB日志分析工具，网上关于它的介绍还是比较多的，因为是基于perl开发的，在管在windows还是linux下都需要先安装perl环境。所以，我们先安装perl 。</p> <div class="language- extra-class"><pre class="language-text"><code>[root@localhost awstats]# tar xvfz perl-5.16.1.tar.gz 　　 解压
+[root@localhost awstats]# cd perl-5.16.1  　　进入目录
+[root@localhost perl-5.16.1# rm -f config.sh Policy.sh
+[root@localhost perl-5.16.1]# sh Configure -de
+[root@localhost perl-5.16.1]#make  　　编译
+[root@localhost perl-5.16.1]# make test
+[root@localhost perl-5.16.1]# make install  　　安装
+config.sh Policy.sh 　　为以前安装时的配置文件，新安装或升级安装时需要将其删除。
+sh Configure -de 　　安装使用默认配置 
+make test　　　　执行make命令， 然后make根据test目标规则， 执行规定的操作。 
+</code></pre></div><p>安装完成后 perl 所在目录为 /usr/local/lib/perl5, perl 执行文件在 /usr/local/bin 中。</p> <p>第2步:安装awstats</p> <div class="language- extra-class"><pre class="language-text"><code>[root@localhost awstats]# tar xvfz awstats-6.4.tgz 
+[root@localhost awstats]# mkdir /etc/awstats
+[root@localhost awstats]# mkdir /var/lib/awstats
+上面创建的两个目录都将在后面的配置中用到，一个用于存放站点日志分析的配置文件，一个用于存放日志数据信息。 
+[root@localhost awstats]# cp -R ./awstats-7.0 /usr/local/   
+-R 表示复制目录及目录内的所有项目到/usr/local/目录下
+[root@localhost test]# mv  awstats-7.0   awstats   　　进行一个重命名，便于操作而已。
+</code></pre></div><p>第3步:配置awstats</p> <div class="language- extra-class"><pre class="language-text"><code>[root@localhost tools]# pwd
+/usr/local/awstats//tools
+Awstats的配置有自带的配置工具awstats_configure.pl ，首先用vi打开configure.pl文件，看看第一行有关perl运行环境的配置是否正确。 
+[root@localhost tools]# vi awstats_configure.pl
+#!/usr/bin/perl
+.............
+[root@localhost tools]# pwd
+/usr/local/awstats/tools
+[root@localhost tools]# perl awstats_configure.pl  运行配置文件
+</code></pre></div><p>awstats_configure.pl工具会自动修改您的apache配置，在apache的配置文件httpd.conf文件中自动修改下面信息</p> <div class="language- extra-class"><pre class="language-text"><code>[root@localhost conf]# pwd
+/usr/local/apache/conf
+[root@localhost conf]# vi httpd.conf
+awstats_configure.pl自动在httpd.conf文件最底部添加了以下内容：
+</code></pre></div><p><img src="asset/20200307/6.png" alt=""></p> <p>awstats_configure.pl还将根据安装过程中您的回答（要分析的网站名称）信息，自动生产 /etc/awstats/awstats.index.conf文件</p> <div class="language- extra-class"><pre class="language-text"><code>[root@localhost awstats]# pwd
+/etc/awstats
+[root@localhost awstats]# ls
+awstats.index.conf
+[root@localhost awstats]# vi awstats.index.conf  配置下面文件
+</code></pre></div><p><img src="asset/20200307/7.png" alt=""></p> <p>到此我们就完成了awstats的安装与配置工作.</p> <p>分析日志</p> <p>开启服务</p> <div class="language- extra-class"><pre class="language-text"><code>[root@localhost cgi-bin]# pwd
+/usr/local/awstats/wwwroot/cgi-bin
+[root@localhost cgi-bin]# chmod +x  awstats.pl     加可执行权限
+[root@localhost cgi-bin]# perl /awstats.pl -update -config=221.221.221.37
+</code></pre></div><p>在浏览器里输入：
+http://localhost/awstats/awstats.pl?config=221.221.221.37
+然后就可以看到生成的日志报告了.</p> <p><img src="asset/20200307/8.png" alt=""></p> <h2 id="小结"><a href="#小结" class="header-anchor">#</a> 小结</h2> <p>本次实验编译完成了编译安装httpd服务器，熟悉了httpd服务的部署过程及常见配置，构建AWStats日志分析系统，httpd服务的访问控制、客户机的地址限制、用户授权限制，构建虚拟WEB主机、基于域名的虚拟主机、基于IP地址、端口的虚拟主机，利用网页浏览器能够进行访问。</p> <p>这是笔者初次接触嵌入式平台的Web服务部署，如有不足请多包涵，欢迎大家提出各种建议。</p></div> <footer class="page-edit" style="display:none;"><!----> <!----></footer> <!----> <!----></main> <!----> <div class="comments-wrapper" data-v-4698c43e><!----></div></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-a81d141e data-v-a81d141e><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-a81d141e><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-a81d141e></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-a81d141e></path></svg></div></div></div>
+    <script src="/assets/js/app.436b8789.js" defer></script><script src="/assets/js/3.26240bff.js" defer></script><script src="/assets/js/1.4d580cd6.js" defer></script><script src="/assets/js/12.9001da7f.js" defer></script>
+  </body>
+</html>
